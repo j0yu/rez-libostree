@@ -3,7 +3,7 @@ name = "libostree"
 __version__ = "2021.3"
 version = __version__ + "+local.1.0.0"
 
-variants = [["os-CentOS-7", "arch-x86_64"]]
+variants = [["os-centos-7", "arch-x86_64"]]
 
 relocatable = False
 
