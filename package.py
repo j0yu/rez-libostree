@@ -45,4 +45,4 @@ def commands():
     import os.path
 
     env.PATH.append(os.path.join("{root}", "bin"))
-    env.PKG_CONFIG_PATH.append(os.path.join("{root}", "lib"))
+    env.PKG_CONFIG_PATH.append(os.path.join("{root}", "lib", "pkgconfig"))
