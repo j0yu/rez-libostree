@@ -61,6 +61,6 @@ jobs:
 
       - name: libostree (validate)
         run: >
-          rez env libostree -- bash -xc
-          '[[ "$PKG_CONFIG_PATH" == *"$REZ_LIBOSTREE_ROOT/lib/pkgconfig"* ]]
+          rez env libostree -c 'set -x;
+          [[ "$PKG_CONFIG_PATH" == *"$REZ_LIBOSTREE_ROOT/lib/pkgconfig"* ]]
           && ls -l $REZ_LIBOSTREE_ROOT/lib/libostree*.so*'
