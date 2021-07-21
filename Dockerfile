@@ -1,6 +1,6 @@
 FROM centos:7
 
-RUN yum install -y yum-utils make epel-release \
+RUN yum install -y yum-utils make epel-release file \
     && yum-builddep -y ostree \
     && yum clean all
 WORKDIR /usr/local/src

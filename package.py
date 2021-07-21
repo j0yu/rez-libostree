@@ -7,6 +7,8 @@ variants = [["os-centos-7", "arch-x86_64"]]
 
 relocatable = False
 
+build_requires = ["git-2"]
+
 build_command = r"""
 set -euf -o pipefail
 
@@ -24,6 +26,8 @@ docker build --rm \
 [ -t 1 ] && CONTAINER_ARGS=("--tty") || CONTAINER_ARGS=()
 CONTAINER_ARGS+=("--env" "INSTALL_DIR={install_dir}")
 CONTAINER_ARGS+=("--env" "VERSION={version}")
+CONTAINER_ARGS+=("--env" REZ_GIT_ROOT="$REZ_GIT_ROOT")
+CONTAINER_ARGS+=("--volume" "$REZ_GIT_ROOT":"$REZ_GIT_ROOT":ro)
 CONTAINER_ARGS+=("$(cat $IMAGE_ID_FILE)")
 
 
