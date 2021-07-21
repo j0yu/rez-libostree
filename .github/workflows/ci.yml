@@ -41,18 +41,26 @@ jobs:
           curl -L https://get.docker.com/ | bash -s
 
       # git
-      - uses: actions/checkout@v2
+      - name: Dependency - Git (checkout)
+        uses: actions/checkout@v2
         with:
           repository: j0yu/rez-git
           path: git
-      - run: rez build --install
+      - name: Dependency - Git (install)
+        run: rez build --install
         working-directory: ./git
 
       # ostree
-      - uses: actions/checkout@v2
+      - name: libostree (checkout)
+        uses: actions/checkout@v2
         with:
           path: ostree
-      - run: rez build --install
+      - name: libostree (install)
+        run: rez build --install
         working-directory: ./ostree
 
-      - run: rez env libostree -c 'ls -l $REZ_LIBOSTREE_ROOT/lib/libsotree*.so*'
+      - name: libostree (validate)
+        run: >
+          rez env libostree -- bash -xc
+          '[[ "$PKG_CONFIG_PATH" == *"$REZ_LIBOSTREE_ROOT/lib/pkgconfig"* ]]
+          && ls -l $REZ_LIBOSTREE_ROOT/lib/libostree*.so*'
